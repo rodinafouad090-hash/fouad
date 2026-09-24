@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#07111f" />
+    <title>Network Infrastructure Project | Hospital Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      (function () {
+        var r = document.documentElement;
+        try {
+          var s = localStorage.getItem("hospital-network-theme");
+          if (
+            s === "dark" ||
+            (!s && window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            r.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --surface: #fff;
+        --surface2: #f6f9fd;
+        --ink: #0f172a;
+        --muted: #4b5b73;
+        --line: #dbe4ef;
+        --primary: #1d4ed8;
+        --accent: #0e7490;
+        --head: #0f2747;
+        --headink: #fff;
+        --tint: rgba(29, 78, 216, 0.07);
+        --pass-bg: #e6f8ee;
+        --pass-ink: #036c48;
+        --pass-line: #9fe1bf;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+        --hero1: #07111f;
+        --hero2: #123b63;
+      }
+      html.dark {
+        --bg: #0a1220;
+        --surface: #111c2e;
+        --surface2: #16243a;
+        --ink: #e8eef8;
+        --muted: #a3b3c9;
+        --line: #27384f;
+        --primary: #7ab4ff;
+        --accent: #3ddbef;
+        --head: #1c3557;
+        --headink: #f1f6ff;
+        --tint: rgba(122, 180, 255, 0.1);
+        --pass-bg: rgba(16, 185, 129, 0.16);
+        --pass-ink: #6ff0b8;
+        --pass-line: rgba(16, 185, 129, 0.4);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        --hero1: #030712;
+        --hero2: #0b2744;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      html {
+        scroll-padding-top: 88px;
+      }
+      @media (min-width: 768px) {
+        html {
+          scroll-behavior: smooth;
+        }
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--ink);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background 0.25s,
+          color 0.25s;
+      }
+      h1,
+      h2,
+      h3,
+      .brand {
+        font-family: "Space Grotesk", "Inter", sans-serif;
+        margin: 0;
+      }
+      p {
+        margin: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      :focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 3px;
+      }
+      .wrap {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in srgb, var(--surface) 90%, transparent);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      .bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+        gap: 12px;
+      }
+      .brand-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+      .logo {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        color: #fff;
+        background: linear-gradient(135deg, #2563eb, #0891b2);
+      }
+      .brand {
+        font-size: 1rem;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .tag {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        color: var(--primary);
+        background: var(--tint);
+        border: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      nav {
+        display: none;
+        gap: 18px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      nav a {
+        color: var(--muted);
+        padding: 6px 0;
+        border-bottom: 2px solid transparent;
+        transition: 0.2s;
+      }
+      nav a:hover {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+      .toggle {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        color: var(--ink);
+        background: var(--surface);
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: 0.2s;
+      }
+      .toggle:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        padding: 60px 16px 80px;
+        text-align: center;
+        background:
+          radial-gradient(
+            circle at 18% 20%,
+            rgba(6, 182, 212, 0.18),
+            transparent 26rem
+          ),
+          radial-gradient(
+            circle at 85% 75%,
+            rgba(37, 99, 235, 0.22),
+            transparent 28rem
+          ),
+          linear-gradient(135deg, var(--hero1), #0b1f3a 55%, var(--hero2));
+      }
+      .hero:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.12;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+        background-size: 42px 42px;
+        -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+        mask-image: linear-gradient(to bottom, #000, transparent);
+      }
+      .hero-in {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        display: grid;
+        gap: 20px;
+        justify-items: center;
+      }
+      .pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .pill {
+        padding: 5px 14px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .hero h1 {
+        font-size: clamp(1.8rem, 5vw, 4rem);
+        line-height: 1.12;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .hero .sub {
+        max-width: 680px;
+        font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+        color: #cbd8ea;
+      }
+      .sup {
+        padding: 12px 20px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 0.85rem;
+        color: #d5e1f0;
+        width: 100%;
+        max-width: 480px;
+      }
+      .sup b {
+        color: #fff;
+      }
+      .sup small {
+        display: block;
+        color: #93c5fd;
+        font-size: 0.75rem;
+        margin-top: 2px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: -40px;
+        position: relative;
+        z-index: 5;
+      }
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: var(--shadow);
+      }
+      .stat span {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .stat strong {
+        display: block;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.5rem;
+        line-height: 1.2;
+        margin: 2px 0;
+        color: var(--ink);
+      }
+      .stat small {
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+      main {
+        padding: 32px 16px 48px;
+        display: grid;
+        gap: 20px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 16px;
+        align-content: start;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .ttl {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ttl h2 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .ico {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        color: var(--primary);
+        background: var(--tint);
+        border: 1px solid var(--line);
+      }
+      .g2,
+      .g3 {
+        display: grid;
+        gap: 16px;
+        width: 100%;
+      }
+      .txt {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .note {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: var(--muted);
+      }
+      h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .checks {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 10px;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+      .checks li {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      .checks i {
+        color: #10b981;
+        margin-top: 4px;
+        flex-shrink: 0;
+      }
+      .checks b {
+        color: var(--ink);
+      }
+      .scroll {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        text-align: left;
+        min-width: 500px;
+      }
+      th {
+        background: var(--head);
+        color: var(--headink);
+        font-weight: 600;
+        padding: 10px 12px;
+        white-space: nowrap;
+      }
+      td {
+        padding: 9px 12px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        vertical-align: top;
+      }
+      td:first-child,
+      td b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      tbody tr:hover td {
+        background: var(--tint);
+      }
+      .m {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.75rem;
+      }
+      td.cmd {
+        color: var(--primary);
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.75rem;
+      }
+      .center {
+        text-align: center;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        color: var(--pass-ink);
+        background: var(--pass-bg);
+        border: 1px solid var(--pass-line);
+      }
+      .mini {
+        background: var(--surface2);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+        display: grid;
+        gap: 8px;
+        align-content: start;
+      }
+      .mini h3 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+        color: var(--primary);
+      }
+      .mini p {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .code {
+        border-radius: 12px;
+        border: 1px solid #1e293b;
+        background: #07111f;
+        overflow: hidden;
+        width: 100%;
+      }
+      .code h4 {
+        margin: 0;
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #7ab4ff;
+        border-bottom: 1px solid #1e293b;
+        background: #0b1a2e;
+      }
+      .code pre {
+        margin: 0;
+        padding: 12px 14px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.72rem;
+        line-height: 1.6;
+        color: #d6e4f7;
+      }
+      .code.out pre {
+        color: #6ee7b7;
+      }
+      .inline {
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 6px;
+        color: var(--primary);
+        background: var(--tint);
+      }
+      .rule {
+        border-top: 1px solid var(--line);
+        padding-top: 16px;
+        display: grid;
+        gap: 12px;
+      }
+      .repo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        border-radius: 12px;
+        background: var(--surface2);
+        border: 1px solid var(--line);
+        transition: 0.2s;
+      }
+      .repo:hover {
+        border-color: var(--primary);
+      }
+      .repo .gh {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+        color: #fff;
+        background: #0f172a;
+        flex: 0 0 auto;
+      }
+      html.dark .repo .gh {
+        background: #22324a;
+      }
+      .repo small {
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      .repo p {
+        font-family: ui-monospace, Consolas, monospace;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .repo .out {
+        margin-left: auto;
+        color: var(--muted);
+      }
+      .repo div {
+        min-width: 0;
+      }
+      footer {
+        background: #07111f;
+        color: #a5b4c8;
+        text-align: center;
+        font-size: 0.78rem;
+        padding: 28px 16px;
+        border-top: 1px solid #1e293b;
+      }
+      @media (min-width: 768px) {
+        .wrap {
+          padding: 0 20px;
+        }
+        .stats {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+          margin-top: -56px;
+        }
+        .stat {
+          padding: 18px 20px;
+          border-radius: 16px;
+        }
+        .stat strong {
+          font-size: 1.9rem;
+        }
+        .hero {
+          padding: 88px 20px 110px;
+        }
+        .g2 {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+        .g3 {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .card {
+          padding: 32px;
+          border-radius: 20px;
+          gap: 20px;
+        }
+        .ttl h2 {
+          font-size: 1.3rem;
+        }
+        .ico {
+          width: 44px;
+          height: 44px;
+          border-radius: 13px;
+        }
+        main {
+          padding: 44px 20px 64px;
+          gap: 28px;
+        }
+        table {
+          font-size: 0.85rem;
+        }
+        th {
+          padding: 12px 14px;
+        }
+        td {
+          padding: 11px 14px;
+        }
+      }
+      @media (min-width: 1024px) {
+        nav {
+          display: flex;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap bar">
+        <div class="brand-box">
+          <span class="logo"><i class="fa-solid fa-network-wired"></i></span>
+          <span class="brand">Group 5 Project</span>
+          <span class="tag">NTI &amp; ITIDA</span>
+        </div>
+        <div class="right">
+          <nav>
+            <a href="#overview">Overview</a>
+            <a href="#team">Team</a>
+            <a href="#addressing">IP Plan</a>
+            <a href="#security">Security</a>
+            <a href="#vlans">VLANs</a>
+            <a href="#pat">PAT</a>
+            <a href="#testing">Testing</a>
+            <a href="#challenges">Challenges</a>
+            <a href="#conclusion">Conclusion</a>
+          </nav>
+          <button
+            id="themeToggle"
+            class="toggle"
+            type="button"
+            aria-label="Toggle theme"
+          >
+            <i id="themeIcon" class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-in">
+        <div class="pills">
+          <span class="pill">ITIDA</span><span class="pill">NTI</span>
+        </div>
+        <h1>Network Infrastructure Project</h1>
+        <p class="sub">
+          Advanced Healthcare Enterprise Network Architecture for Hospital
+          Management
+        </p>
+        <div class="sup">
+          <b>Supervisor:</b> Dr. Aya Magdy<small
+            >Assistant Lecturer, Faculty of Computers and Information</small
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat">
+          <span>Network Segments</span><strong>9</strong
+          ><small>VLANs &amp; links</small>
+        </div>
+        <div class="stat">
+          <span>Security Controls</span><strong>8</strong
+          ><small>Configured features</small>
+        </div>
+        <div class="stat">
+          <span>Verification Tests</span><strong>9</strong
+          ><small>All documented</small>
+        </div>
+        <div class="stat">
+          <span>Availability</span><strong>HSRP</strong
+          ><small>Gateway redundancy</small>
+        </div>
+      </div>
+    </div>
+
+    <main class="wrap">
+      <section id="overview" class="g2">
+        <div class="card">
+          <div class="ttl">
+            <span class="ico"><i class="fa-solid fa-circle-info"></i></span>
+            <h2>1. Project Overview</h2>
+          </div>
+          <p class="txt">
+            This project involves designing and simulating a secure network
+            infrastructure for a modern hospital using Cisco Packet Tracer. It
+            interconnects key departments such as Emergency, Administration,
+            Clinics, and Laboratories to ensure reliable communication. The
+            architecture uses VLANs for network segmentation and security
+            measures like Port Security and SSH to protect sensitive patient
+            data.
+          </p>
+        </div>
+        <div class="card">
+          <div class="ttl">
+            <span class="ico"><i class="fa-solid fa-bullseye"></i></span>
+            <h2>2. Project Objectives</h2>
+          </div>
+          <ul class="checks">
+            <li>
+              <i class="fa-solid fa-check"></i
+              ><span
+                ><b>Design a scalable network topology</b> integrating all
+                hospital departments.</span
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i
+              ><span
+                ><b>Implement VLANs</b> to segment traffic and secure medical
+                data.</span
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i
+              ><span
+                ><b>Configure reliable routing</b> and IP schemes for efficient
+                connectivity.</span
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i
+              ><span
+                ><b>Deploy security features</b> like Port Security and SSH to
+                protect infrastructure.</span
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="team" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-users"></i></span>
+          <h2>3. Team Members &amp; Responsibilities</h2>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>ID</th>
+                <th>Primary Responsibility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ziad Hany Mohamed</td>
+                <td>328007</td>
+                <td>
+                  Network Security &amp; Device Hardening (SSH, Port Security,
+                  ACLs)
+                </td>
+              </tr>
+              <tr>
+                <td>Rana Ibrahim Abu Shosh</td>
+                <td>275492</td>
+                <td>
+                  High Availability &amp; Link Aggregation (HSRP &amp;
+                  EtherChannel)
+                </td>
+              </tr>
+              <tr>
+                <td>Rodina Ahmed Fouad</td>
+                <td>309776</td>
+                <td>
+                  IP Routing Protocols Implementation &amp; Wireless LAN (WLAN)
+                </td>
+              </tr>
+              <tr>
+                <td>Rahma Waleed Ezzeldin</td>
+                <td>317855</td>
+                <td>VLANs Architecture, Trunking &amp; Inter-VLAN Routing</td>
+              </tr>
+              <tr>
+                <td>Elany Ayman Fayek</td>
+                <td>329273</td>
+                <td>
+                  NAT/PAT Address Translation &amp; Network Services (DHCP/DNS)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="addressing" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-diagram-project"></i></span>
+          <h2>4. Classful IP Addressing Plan</h2>
+        </div>
+        <p class="note">
+          The table details the classful IP addressing scheme allocated to each
+          VLAN and network segment, using the standard Class C default mask
+          (/24).
+        </p>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Network / VLAN</th>
+                <th>Available Hosts</th>
+                <th>Network Address</th>
+                <th>Prefix</th>
+                <th>Usable Range</th>
+                <th>Broadcast</th>
+              </tr>
+            </thead>
+            <tbody class="m">
+              <tr>
+                <td>VLAN 10</td>
+                <td>254</td>
+                <td>192.168.10.0</td>
+                <td>/24</td>
+                <td>192.168.10.1 – 192.168.10.254</td>
+                <td>192.168.10.255</td>
+              </tr>
+              <tr>
+                <td>VLAN 20</td>
+                <td>254</td>
+                <td>192.168.20.0</td>
+                <td>/24</td>
+                <td>192.168.20.1 – 192.168.20.254</td>
+                <td>192.168.20.255</td>
+              </tr>
+              <tr>
+                <td>VLAN 40</td>
+                <td>254</td>
+                <td>192.168.40.0</td>
+                <td>/24</td>
+                <td>192.168.40.1 – 192.168.40.254</td>
+                <td>192.168.40.255</td>
+              </tr>
+              <tr>
+                <td>VLAN 50</td>
+                <td>254</td>
+                <td>192.168.50.0</td>
+                <td>/24</td>
+                <td>192.168.50.1 – 192.168.50.254</td>
+                <td>192.168.50.255</td>
+              </tr>
+              <tr>
+                <td>Link Network 1</td>
+                <td>254</td>
+                <td>192.168.80.0</td>
+                <td>/24</td>
+                <td>192.168.80.1 – 192.168.80.254</td>
+                <td>192.168.80.255</td>
+              </tr>
+              <tr>
+                <td>Link Network 2</td>
+                <td>254</td>
+                <td>192.168.90.0</td>
+                <td>/24</td>
+                <td>192.168.90.1 – 192.168.90.254</td>
+                <td>192.168.90.255</td>
+              </tr>
+              <tr>
+                <td>Link Network 3</td>
+                <td>254</td>
+                <td>192.168.100.0</td>
+                <td>/24</td>
+                <td>192.168.100.1 – 192.168.100.254</td>
+                <td>192.168.100.255</td>
+              </tr>
+              <tr>
+                <td>Link Network 4</td>
+                <td>254</td>
+                <td>192.168.60.0</td>
+                <td>/24</td>
+                <td>192.168.60.1 – 192.168.60.254</td>
+                <td>192.168.60.255</td>
+              </tr>
+              <tr>
+                <td>Link Network 5</td>
+                <td>254</td>
+                <td>192.168.70.0</td>
+                <td>/24</td>
+                <td>192.168.70.1 – 192.168.70.254</td>
+                <td>192.168.70.255</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="security" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-shield-halved"></i></span>
+          <h2>5. Network Security Matrix</h2>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Security Feature</th>
+                <th>Device(s)</th>
+                <th>Purpose</th>
+                <th>Verification Command</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BPDU Guard + PortFast</td>
+                <td>Access Switches</td>
+                <td>
+                  Blocks unauthorized switch connections and protects against
+                  STP attacks
+                </td>
+                <td class="cmd">
+                  show spanning-tree interface &lt;port&gt; detail
+                </td>
+              </tr>
+              <tr>
+                <td>STP Root Primary/Secondary</td>
+                <td>Active &amp; Standby</td>
+                <td>
+                  Explicitly defines the root bridge, preventing a rogue switch
+                  from becoming root
+                </td>
+                <td class="cmd">show spanning-tree summary</td>
+              </tr>
+              <tr>
+                <td>Extended ACL (PROTECT-SERVERS)</td>
+                <td>Active &amp; Standby</td>
+                <td>
+                  Restricts server access (DHCP, DNS, HTTP, FTP) to allowed
+                  protocols and ports
+                </td>
+                <td class="cmd">show access-lists PROTECT-SERVERS</td>
+              </tr>
+              <tr>
+                <td>Anti-Spoofing ACL</td>
+                <td>Router2 &amp; Router3</td>
+                <td>
+                  Blocks inbound traffic carrying private or spoofed source IP
+                  addresses
+                </td>
+                <td class="cmd">show access-lists ANTI-SPOOF-IN</td>
+              </tr>
+              <tr>
+                <td>SSH Configuration</td>
+                <td>All Routers &amp; Switches</td>
+                <td>
+                  Provides encrypted remote management access to devices
+                  (replaces Telnet)
+                </td>
+                <td class="cmd">show ip ssh / show ssh</td>
+              </tr>
+              <tr>
+                <td>Enable Secret &amp; Passwords</td>
+                <td>All Routers &amp; Switches</td>
+                <td>Encrypts EXEC access and secures console and VTY lines</td>
+                <td class="cmd">show running-config</td>
+              </tr>
+              <tr>
+                <td>Port Security</td>
+                <td>Access Switches</td>
+                <td>
+                  Restricts port access to authorized MAC addresses, preventing
+                  MAC flooding
+                </td>
+                <td class="cmd">show port-security interface &lt;port&gt;</td>
+              </tr>
+              <tr>
+                <td>Disabling Unused Interfaces</td>
+                <td>Access Switches</td>
+                <td>
+                  Enhances physical security by administratively shutting down
+                  unused ports
+                </td>
+                <td class="cmd">show ip interface brief</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="vlans" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-sitemap"></i></span>
+          <h2>6. VLANs &amp; Inter-VLAN Configuration</h2>
+        </div>
+        <div class="g2">
+          <div style="display: grid; gap: 12px">
+            <h3>VLAN Allocation</h3>
+            <div class="scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>VLAN ID</th>
+                    <th>VLAN Name</th>
+                    <th>Department / Function</th>
+                    <th>Subnet</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>VLAN 10</td>
+                    <td>Reception_Admin</td>
+                    <td>Reception &amp; Medical Administration</td>
+                    <td class="m">192.168.10.0/24</td>
+                  </tr>
+                  <tr>
+                    <td>VLAN 20</td>
+                    <td>Medical_Staff</td>
+                    <td>Doctors &amp; Nursing</td>
+                    <td class="m">192.168.20.0/24</td>
+                  </tr>
+                  <tr>
+                    <td>VLAN 40</td>
+                    <td>Patients_Guest</td>
+                    <td>Patients &amp; Visitors Network</td>
+                    <td class="m">192.168.40.0/24</td>
+                  </tr>
+                  <tr>
+                    <td>VLAN 50</td>
+                    <td>Printers_Services</td>
+                    <td>Printers &amp; Auxiliary Services</td>
+                    <td class="m">192.168.50.0/24</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div style="display: grid; gap: 12px">
+            <h3>Trunking &amp; Interconnection</h3>
+            <div class="scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Link</th>
+                    <th>Interfaces</th>
+                    <th>Trunk Mode</th>
+                    <th>Allowed VLANs</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Floor 1 ↔ Floor 2</td>
+                    <td class="m">Fa0/3, Fa0/7</td>
+                    <td>Trunk (dot1q)</td>
+                    <td class="m">10, 20, 40, 50</td>
+                  </tr>
+                  <tr>
+                    <td>Floor 2 ↔ Floor 3</td>
+                    <td class="m">Fa0/8, Fa0/9</td>
+                    <td>Trunk (dot1q)</td>
+                    <td class="m">10, 20, 40, 50</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-server"></i></span>
+          <h2>7. High Availability &amp; Wireless</h2>
+        </div>
+        <div class="g3">
+          <div class="mini">
+            <h3><i class="fa-solid fa-link"></i>EtherChannel</h3>
+            <p>
+              Configured between core switches using LACP to aggregate physical
+              links into a single logical link for higher bandwidth and link
+              redundancy.
+            </p>
+          </div>
+          <div class="mini">
+            <h3><i class="fa-solid fa-server"></i>HSRP Redundancy</h3>
+            <p>
+              Configured between core routers to provide default gateway
+              redundancy using a Virtual IP with Active and Standby roles.
+            </p>
+          </div>
+          <div class="mini">
+            <h3><i class="fa-solid fa-wifi"></i>WLAN Integration</h3>
+            <p>
+              Wireless Access Points (AP) integrated using WPA2-PSK security to
+              enable safe mobility for medical devices and laptops.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pat" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-route"></i></span>
+          <h2>8. PAT (Port Address Translation / NAT Overload)</h2>
+        </div>
+        <div style="display: grid; gap: 14px">
+          <h3>8.1 Design / Configuration</h3>
+          <p class="txt">
+            NAT Overload (PAT) was configured on the edge router to allow
+            internal hosts to share a single public IP address for secure
+            internet access.
+          </p>
+          <div class="g2">
+            <div class="code">
+              <h4>Edge Router Configuration</h4>
+              <pre>
+en
+conf t
+int g0/0/0
+ ip add 192.168.100.1 255.255.255.0
+ no sh
+ ip nat inside
+int g0/0/1
+ ip add 209.165.200.233 255.255.255.252
+ no sh
+ ip nat outside
+exit
+access-list 1 permit 192.168.0.0 0.0.255.255
+ip nat inside source list 1 int g0/0/1 overload
+
+router ospf 1
+ network 192.168.100.0 0.0.0.255 area 0
+ default-information originate
+exit
+ip route 0.0.0.0 0.0.0.0 209.165.200.234</pre
+              >
+            </div>
+            <div class="code">
+              <h4>Internal / ISP Router Configuration</h4>
+              <pre>
+en
+conf t
+ip route 0.0.0.0 0.0.0.0 209.165.200.233
+
+int g0/0/0
+ ip add 209.165.200.234 255.255.255.252
+ no sh</pre
+              >
+            </div>
+          </div>
+        </div>
+        <div class="rule">
+          <h3>8.2 Testing / Verification</h3>
+          <p class="txt">
+            The NAT translation table and PAT operation were verified by running
+            the following command on the edge router:
+            <span class="inline">show ip nat translations</span>
+          </p>
+          <div class="code out">
+            <pre>
+Router# show ip nat translations
+Pro  Inside global         Inside local        Outside local      Outside global
+icmp 209.165.200.233:10192 192.168.20.2:10    209.165.200.234:10 209.165.200.234:10
+icmp 209.165.200.233:1     192.168.20.2:1     209.165.200.234:1  209.165.200.234:1
+icmp 209.165.200.233:2     192.168.20.2:2     209.165.200.234:2  209.165.200.234:2
+icmp 209.165.200.233:3     192.168.20.2:3     209.165.200.234:3  209.165.200.234:3
+icmp 209.165.200.233:4     192.168.20.2:4     209.165.200.234:4  209.165.200.234:4
+icmp 209.165.200.233:6     192.168.20.2:6     209.165.200.234:6  209.165.200.234:6
+icmp 209.165.200.233:7     192.168.20.2:7     209.165.200.234:7  209.165.200.234:7
+icmp 209.165.200.233:8     192.168.20.2:8     209.165.200.234:8  209.165.200.234:8
+icmp 209.165.200.233:9     192.168.20.2:9     209.165.200.234:9  209.165.200.234:9</pre
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="testing" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-vial-circle-check"></i></span>
+          <h2>9. Testing &amp; Verification</h2>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Test ID</th>
+                <th>Feature</th>
+                <th>Test Procedure</th>
+                <th>Expected Result</th>
+                <th class="center">Actual Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TEST 1</td>
+                <td><b>End-to-End Connectivity</b></td>
+                <td>
+                  Ping between PCs across different hospital departments and
+                  subnets.
+                </td>
+                <td>Successful ICMP replies (0% packet loss).</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 2</td>
+                <td><b>Routing</b></td>
+                <td>Run traceroute between remote network subnets.</td>
+                <td>Packets traverse the optimal routing path.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 3</td>
+                <td><b>DHCP / DNS / HTTP</b></td>
+                <td>
+                  Request a dynamic IP via DHCP and browse the server web page.
+                </td>
+                <td>IP assigned successfully and web page loads.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 4</td>
+                <td><b>VLAN / Inter-VLAN</b></td>
+                <td>
+                  Ping devices across different VLANs through the gateway.
+                </td>
+                <td>Successful inter-VLAN communication.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 5</td>
+                <td><b>EtherChannel</b></td>
+                <td>
+                  Verify aggregated links using 'show etherchannel summary'.
+                </td>
+                <td>Links bundled into an active port-channel interface.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 6</td>
+                <td><b>HSRP Failover</b></td>
+                <td>
+                  Simulate active router failure and check standby takeover.
+                </td>
+                <td>Standby router takes over the gateway role seamlessly.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 7</td>
+                <td><b>WLAN</b></td>
+                <td>
+                  Connect wireless clients to the Access Point and ping the
+                  default gateway.
+                </td>
+                <td>Successful wireless association and ping reply.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 8</td>
+                <td><b>NAT</b></td>
+                <td>
+                  Verify the translation table using 'show ip nat translations'.
+                </td>
+                <td>Inside local IPs mapped successfully via PAT.</td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+              <tr>
+                <td>TEST 9</td>
+                <td><b>Security</b></td>
+                <td>Test access control lists and port security rules.</td>
+                <td>
+                  Unauthorized traffic blocked, authorized traffic allowed.
+                </td>
+                <td class="center"><span class="badge">PASS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="challenges" class="card">
+        <div class="ttl">
+          <span class="ico"
+            ><i class="fa-solid fa-triangle-exclamation"></i
+          ></span>
+          <h2>10. Challenges &amp; Solutions</h2>
+        </div>
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Challenge</th>
+                <th>Root Cause</th>
+                <th>Solution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>HSRP status verification returned blank output</td>
+                <td>
+                  Verification commands were executed from the wrong interface
+                  or from global configuration mode.
+                </td>
+                <td>
+                  Verified commands on the correct gateway interface while in
+                  privileged EXEC mode.
+                </td>
+              </tr>
+              <tr>
+                <td>NAT translation table showed empty results</td>
+                <td>
+                  The table was checked before any traffic had traversed the
+                  router.
+                </td>
+                <td>
+                  Generated test traffic with a ping from an internal PC to
+                  populate the translation entries.
+                </td>
+              </tr>
+              <tr>
+                <td>Show commands failed inside config mode</td>
+                <td>
+                  Monitoring commands were run from the global configuration
+                  prompt (config#).
+                </td>
+                <td>
+                  Exited to privileged EXEC mode using 'end' before running the
+                  commands.
+                </td>
+              </tr>
+              <tr>
+                <td>EtherChannel bundle mismatch error</td>
+                <td>
+                  Conflicting channel-group mode or speed/duplex settings across
+                  the physical ports.
+                </td>
+                <td>
+                  Ensured matching mode settings (e.g., active/active) across
+                  all bundled physical interfaces.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="conclusion" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-solid fa-flag-checkered"></i></span>
+          <h2>11. Conclusion</h2>
+        </div>
+        <p class="txt" style="color: var(--ink); font-weight: 500">
+          The hospital network project successfully achieved high availability,
+          redundancy, and secure internet connectivity through structured
+          simulation.
+        </p>
+        <div class="g2">
+          <div class="mini">
+            <h3>
+              <i class="fa-solid fa-trophy" style="color: #f59e0b"></i>Key
+              Achievements
+            </h3>
+            <p>
+              Implemented HSRP for gateway redundancy, EtherChannel for link
+              aggregation, and NAT Overload for scalable internet access.
+            </p>
+          </div>
+          <div class="mini">
+            <h3><i class="fa-solid fa-book-open"></i>Lessons Learned</h3>
+            <p>
+              Gained practical experience in network design, routing protocols,
+              and systematic CLI verification.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="appendix" class="card">
+        <div class="ttl">
+          <span class="ico"><i class="fa-brands fa-github"></i></span>
+          <div>
+            <h2>12. GitHub Repository</h2>
+            <p class="note" style="font-style: normal">
+              Project source and supporting materials.
+            </p>
+          </div>
+        </div>
+        <a href="#" class="repo">
+          <span class="gh"><i class="fa-brands fa-github"></i></span>
+          <div>
+            <small>REPOSITORY</small>
+            <p>https://github.com/...</p>
+          </div>
+          <i class="fa-solid fa-arrow-up-right-from-square out"></i>
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        NTI &amp; ITIDA | Supervisor: Dr. Aya Magdy | Network Infrastructure
+        Project - Group 5
+      </p>
+    </footer>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var toggle = document.getElementById("themeToggle");
+        var icon = document.getElementById("themeIcon");
+        function sync() {
+          var dark = root.classList.contains("dark");
+          icon.className = dark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+          toggle.setAttribute(
+            "aria-label",
+            dark ? "Switch to light mode" : "Switch to dark mode",
+          );
+        }
+        sync();
+        toggle.addEventListener("click", function () {
+          root.classList.toggle("dark");
+          try {
+            localStorage.setItem(
+              "hospital-network-theme",
+              root.classList.contains("dark") ? "dark" : "light",
+            );
+          } catch (e) {}
+          sync();
+        });
+      })();
+    </script>
+  </body>
+</html>
