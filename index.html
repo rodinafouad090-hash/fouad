@@ -34,23 +34,30 @@
     </script>
     <style>
       :root {
-        --bg: #f3f6fb;
+        --bg: #f8f6ff;
         --surface: #fff;
-        --surface2: #f6f9fd;
-        --ink: #0f172a;
-        --muted: #4b5b73;
-        --line: #dbe4ef;
-        --primary: #1d4ed8;
-        --accent: #0e7490;
-        --head: #0f2747;
+        --surface2: #f5f1ff;
+        --ink: #1e1838;
+        --muted: #5a5477;
+        --line: #e4dcf7;
+        --primary: #6d28d9;
+        --head: #4c1d95;
         --headink: #fff;
-        --tint: rgba(29, 78, 216, 0.07);
+        --tint: rgba(109, 40, 217, 0.07);
         --pass-bg: #e6f8ee;
         --pass-ink: #036c48;
         --pass-line: #9fe1bf;
-        --shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
-        --hero1: #07111f;
-        --hero2: #123b63;
+        --shadow: 0 10px 30px rgba(76, 29, 149, 0.09);
+        --hero1: #2e1065;
+        --hero2: #6d28d9;
+        --glow1: rgba(192, 132, 252, 0.28);
+        --glow2: rgba(124, 58, 237, 0.3);
+        --heroacc: #ddd0ff;
+        --g1: #7c3aed;
+        --g2: #a855f7;
+        --foot: #2e1065;
+        --footink: #d8ccf5;
+        --footline: #4c1d95;
       }
       html.dark {
         --bg: #0a1220;
@@ -60,7 +67,6 @@
         --muted: #a3b3c9;
         --line: #27384f;
         --primary: #7ab4ff;
-        --accent: #3ddbef;
         --head: #1c3557;
         --headink: #f1f6ff;
         --tint: rgba(122, 180, 255, 0.1);
@@ -70,6 +76,14 @@
         --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         --hero1: #030712;
         --hero2: #0b2744;
+        --glow1: rgba(6, 182, 212, 0.18);
+        --glow2: rgba(37, 99, 235, 0.22);
+        --heroacc: #93c5fd;
+        --g1: #2563eb;
+        --g2: #0891b2;
+        --foot: #07111f;
+        --footink: #a5b4c8;
+        --footline: #1e293b;
       }
       * {
         box-sizing: border-box;
@@ -154,7 +168,7 @@
         place-items: center;
         border-radius: 10px;
         color: #fff;
-        background: linear-gradient(135deg, #2563eb, #0891b2);
+        background: linear-gradient(135deg, var(--g1), var(--g2));
       }
       .brand {
         font-size: 1rem;
@@ -219,16 +233,14 @@
         padding: 60px 16px 80px;
         text-align: center;
         background:
-          radial-gradient(
-            circle at 18% 20%,
-            rgba(6, 182, 212, 0.18),
-            transparent 26rem
-          ),
-          radial-gradient(
-            circle at 85% 75%,
-            rgba(37, 99, 235, 0.22),
-            transparent 28rem
-          ),
+          radial-gradient(circle at 18% 20%, var(--glow1), transparent 26rem),
+          radial-gradient(circle at 85% 75%, var(--glow2), transparent 28rem),
+          linear-gradient(135deg, var(--hero1), var(--hero1) 10%, var(--hero2));
+      }
+      html.dark .hero {
+        background:
+          radial-gradient(circle at 18% 20%, var(--glow1), transparent 26rem),
+          radial-gradient(circle at 85% 75%, var(--glow2), transparent 28rem),
           linear-gradient(135deg, var(--hero1), #0b1f3a 55%, var(--hero2));
       }
       .hero:before {
@@ -263,8 +275,8 @@
         font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.1em;
-        background: rgba(255, 255, 255, 0.09);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
       .hero h1 {
         font-size: clamp(1.8rem, 5vw, 4rem);
@@ -275,15 +287,18 @@
       .hero .sub {
         max-width: 680px;
         font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+        color: #e6dcfa;
+      }
+      html.dark .hero .sub {
         color: #cbd8ea;
       }
       .sup {
         padding: 12px 20px;
         border-radius: 14px;
-        background: rgba(255, 255, 255, 0.09);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         font-size: 0.85rem;
-        color: #d5e1f0;
+        color: #efe8ff;
         width: 100%;
         max-width: 480px;
       }
@@ -292,7 +307,7 @@
       }
       .sup small {
         display: block;
-        color: #93c5fd;
+        color: var(--heroacc);
         font-size: 0.75rem;
         margin-top: 2px;
       }
@@ -323,7 +338,7 @@
         font-size: 1.5rem;
         line-height: 1.2;
         margin: 2px 0;
-        color: var(--ink);
+        color: var(--primary);
       }
       .stat small {
         font-size: 0.7rem;
@@ -556,11 +571,8 @@
         place-items: center;
         font-size: 1.2rem;
         color: #fff;
-        background: #0f172a;
+        background: var(--head);
         flex: 0 0 auto;
-      }
-      html.dark .repo .gh {
-        background: #22324a;
       }
       .repo small {
         display: block;
@@ -586,12 +598,12 @@
         min-width: 0;
       }
       footer {
-        background: #07111f;
-        color: #a5b4c8;
+        background: var(--foot);
+        color: var(--footink);
         text-align: center;
         font-size: 0.78rem;
         padding: 28px 16px;
-        border-top: 1px solid #1e293b;
+        border-top: 1px solid var(--footline);
       }
       @media (min-width: 768px) {
         .wrap {
