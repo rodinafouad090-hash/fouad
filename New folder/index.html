@@ -4,268 +4,270 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NTI ITIDA | Network Infrastructure Team</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Plus Jakarta Sans", "sans-serif"],
-            },
-            colors: {
-              brand: {
-                dark: "#070812",
-                card: "#101321",
-                purple: "#8b5cf6",
-                cyan: "#06b6d4",
-                blue: "#3b82f6",
-              },
-            },
-          },
+          extend: { fontFamily: { sans: ["Plus Jakarta Sans", "sans-serif"] } },
         },
       };
     </script>
-
     <style>
       :root {
         --bg: #070812;
-        --bg-secondary: #0c0f1c;
-        --card: rgba(17, 20, 36, 0.72);
-        --card-solid: #111424;
+        --bg2: #0c1020;
+        --card: rgba(17, 21, 39, 0.68);
+        --solid: #111628;
         --text: #f8fafc;
-        --muted: #94a3b8;
-        --border: rgba(255, 255, 255, 0.08);
+        --muted: #a6b2c7;
+        --border: rgba(255, 255, 255, 0.09);
         --purple: #8b5cf6;
         --cyan: #06b6d4;
+        --blue: #3b82f6;
       }
-
       body.light {
-        --bg: #f5f7fb;
-        --bg-secondary: #eef2f8;
-        --card: rgba(255, 255, 255, 0.82);
-        --card-solid: #ffffff;
-        --text: #111827;
-        --muted: #64748b;
-        --border: rgba(15, 23, 42, 0.09);
+        --bg: #f4f7fb;
+        --bg2: #edf2f8;
+        --card: rgba(255, 255, 255, 0.78);
+        --solid: #fff;
+        --text: #101827;
+        --muted: #536176;
+        --border: rgba(15, 23, 42, 0.1);
       }
-
       * {
         box-sizing: border-box;
       }
-
       html {
         scroll-behavior: smooth;
       }
-
       body {
         margin: 0;
-        max-width: 100%;
         overflow-x: hidden;
         font-family: "Plus Jakarta Sans", sans-serif;
-        background:
-          radial-gradient(
-            circle at 15% 10%,
-            rgba(124, 58, 237, 0.13),
-            transparent 28%
-          ),
-          radial-gradient(
-            circle at 85% 20%,
-            rgba(6, 182, 212, 0.1),
-            transparent 28%
-          ),
-          var(--bg);
         color: var(--text);
-        transition:
-          background 0.35s ease,
-          color 0.35s ease;
-      }
-
-      body.light {
         background:
           radial-gradient(
-            circle at 10% 10%,
-            rgba(139, 92, 246, 0.1),
-            transparent 28%
+            circle at 10% 5%,
+            rgba(124, 58, 237, 0.16),
+            transparent 27%
           ),
           radial-gradient(
             circle at 90% 15%,
-            rgba(6, 182, 212, 0.09),
+            rgba(6, 182, 212, 0.12),
             transparent 28%
           ),
           var(--bg);
+        transition:
+          background 0.4s,
+          color 0.4s;
       }
-
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.3;
+        background-image:
+          linear-gradient(rgba(139, 92, 246, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(139, 92, 246, 0.035) 1px, transparent 1px);
+        background-size: 45px 45px;
+        z-index: -2;
+      }
       ::selection {
-        background: rgba(6, 182, 212, 0.3);
-        color: inherit;
+        background: rgba(6, 182, 212, 0.28);
       }
-
       .glass {
         background: var(--card);
         border: 1px solid var(--border);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.12);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 18px 70px rgba(0, 0, 0, 0.12);
       }
-
-      .glass:hover {
-        border-color: rgba(139, 92, 246, 0.3);
-        transform: translateY(-4px);
+      .nav-text,
+      .section-title {
+        color: var(--text);
       }
-
-      .transition-card {
-        transition:
-          transform 0.3s ease,
-          border-color 0.3s ease,
-          box-shadow 0.3s ease;
+      .body-text {
+        color: var(--muted);
       }
-
       .gradient-text {
-        background: linear-gradient(
-          135deg,
-          #a78bfa 0%,
-          #22d3ee 50%,
-          #60a5fa 100%
-        );
+        background: linear-gradient(135deg, #a78bfa, #22d3ee 52%, #60a5fa);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-
       .gradient-bg {
         background: linear-gradient(135deg, #7c3aed, #0891b2);
       }
-
       .gradient-bg:hover {
-        box-shadow: 0 15px 40px rgba(124, 58, 237, 0.25);
+        box-shadow: 0 16px 45px rgba(124, 58, 237, 0.3);
         transform: translateY(-2px);
       }
-
-      .grid-bg {
-        background-image:
-          linear-gradient(rgba(139, 92, 246, 0.045) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(139, 92, 246, 0.045) 1px, transparent 1px);
-        background-size: 42px 42px;
+      .soft-bg {
+        background: rgba(255, 255, 255, 0.018);
       }
-
+      body.light .soft-bg {
+        background: rgba(255, 255, 255, 0.48);
+      }
+      body.light .nav-text,
+      body.light .section-title {
+        color: #101827;
+      }
+      body.light .body-text {
+        color: #536176;
+      }
+      .nav-scrolled {
+        box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+        background: rgba(7, 8, 18, 0.72);
+      }
+      body.light .nav-scrolled {
+        background: rgba(255, 255, 255, 0.78);
+      }
       .hero-orb {
         position: absolute;
         border-radius: 999px;
-        filter: blur(70px);
+        filter: blur(75px);
         pointer-events: none;
+        animation: float 8s ease-in-out infinite;
       }
-
       .orb-one {
-        width: 300px;
-        height: 300px;
-        background: rgba(124, 58, 237, 0.17);
+        width: 310px;
+        height: 310px;
+        background: rgba(124, 58, 237, 0.16);
         top: 5%;
-        left: -100px;
+        left: -120px;
       }
-
       .orb-two {
-        width: 280px;
-        height: 280px;
-        background: rgba(6, 182, 212, 0.13);
-        right: -80px;
+        width: 290px;
+        height: 290px;
+        background: rgba(6, 182, 212, 0.12);
+        right: -100px;
         top: 25%;
+        animation-delay: 1.5s;
       }
-
       .orb-three {
-        width: 240px;
-        height: 240px;
+        width: 250px;
+        height: 250px;
         background: rgba(59, 130, 246, 0.1);
-        bottom: 10%;
-        left: 35%;
+        bottom: 5%;
+        left: 38%;
+        animation-delay: 3s;
       }
-
-      .nav-scrolled {
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(0, -24px, 0);
+        }
       }
-
-      .light .nav-text {
-        color: #0f172a !important;
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
       }
-
-      .light .section-title {
-        color: #0f172a;
+      .reveal.show {
+        opacity: 1;
+        transform: none;
       }
-
-      .light .body-text {
-        color: #64748b;
+      .float-card {
+        animation: floatCard 5s ease-in-out infinite;
       }
-
-      .light .soft-bg {
-        background: rgba(255, 255, 255, 0.5);
+      @keyframes floatCard {
+        0%,
+        100% {
+          transform: translateY(0) rotateX(0) rotateY(0);
+        }
+        50% {
+          transform: translateY(-9px) rotateX(1deg) rotateY(-1deg);
+        }
       }
-
-      .light .border-light {
-        border-color: rgba(15, 23, 42, 0.08);
+      .orbit {
+        animation: spin 34s linear infinite;
       }
-
-      .light .project-overlay {
+      .orbit-reverse {
+        animation: spinReverse 26s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinReverse {
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+      .tilt-card {
+        transform-style: preserve-3d;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .tilt-card:hover {
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+        border-color: rgba(139, 92, 246, 0.32);
+      }
+      .project-image {
+        transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+        cursor: zoom-in;
+      }
+      .project-card:hover .project-image {
+        transform: scale(1.08);
+      }
+      .project-image-wrap {
+        perspective: 1000px;
+      }
+      .project-card .project-content {
+        transform: translateZ(20px);
+      }
+      .project-overlay {
         background: linear-gradient(
           to top,
-          rgba(255, 255, 255, 0.95),
-          transparent
+          rgba(7, 8, 18, 0.92),
+          transparent 70%
         );
       }
-
-      .light .modal-box {
-        background: #ffffff;
+      body.light .project-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(255, 255, 255, 0.9),
+          transparent 72%
+        );
       }
-
       .stat-line {
         position: relative;
       }
-
-      .stat-line::after {
+      .stat-line:after {
         content: "";
         position: absolute;
         right: -13px;
         top: 50%;
-        transform: translateY(-50%);
         width: 1px;
         height: 42px;
+        transform: translateY(-50%);
         background: var(--border);
       }
-
-      .stat-line:last-child::after {
+      .stat-line:last-child:after {
         display: none;
       }
-
-      .project-image {
-        transition: transform 0.5s ease;
-      }
-
-      .project-card:hover .project-image {
-        transform: scale(1.06);
-      }
-
-      .skill-icon {
-        transition: transform 0.3s ease;
-      }
-
-      .skill-card:hover .skill-icon {
-        transform: scale(1.1) rotate(-4deg);
-      }
-
       .timeline-line {
         position: absolute;
         left: 15px;
         top: 35px;
-        bottom: -20px;
+        bottom: -25px;
         width: 1px;
         background: linear-gradient(
           to bottom,
@@ -273,19 +275,58 @@
           transparent
         );
       }
-
+      .modal-backdrop {
+        animation: fadeIn 0.25s ease;
+      }
+      .modal-panel {
+        animation: modalIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .image-viewer img {
+        max-height: 82vh;
+        max-width: 92vw;
+        object-fit: contain;
+      }
       .mobile-open {
         display: block !important;
       }
-
       @media (max-width: 767px) {
-        .stat-line::after {
+        .stat-line:after {
           display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *:before,
+        *:after {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
         }
       }
     </style>
   </head>
-
   <body>
     <nav
       id="navbar"
@@ -299,17 +340,15 @@
             >
               <i data-lucide="network" class="w-5 h-5"></i>
             </div>
-
             <div>
               <div class="font-extrabold tracking-wide nav-text">NTI ITIDA</div>
               <div
-                class="text-[10px] font-semibold tracking-[0.18em] text-cyan-400 uppercase"
+                class="text-[10px] font-semibold tracking-[.18em] text-cyan-400 uppercase"
               >
                 Network Infrastructure
               </div>
             </div>
           </a>
-
           <div class="hidden lg:flex items-center gap-7 text-sm font-medium">
             <a
               href="#home"
@@ -342,7 +381,6 @@
               >Journey</a
             >
           </div>
-
           <div class="flex items-center gap-2">
             <button
               id="themeBtn"
@@ -351,7 +389,6 @@
             >
               <i id="themeIcon" data-lucide="sun" class="w-4 h-4"></i>
             </button>
-
             <button
               id="mobileBtn"
               class="lg:hidden w-10 h-10 rounded-xl glass flex items-center justify-center nav-text"
@@ -360,10 +397,9 @@
             </button>
           </div>
         </div>
-
         <div
           id="mobileMenu"
-          class="hidden lg:hidden pb-5 border-t border-light pt-4 space-y-1"
+          class="hidden lg:hidden pb-5 border-t border-white/10 pt-4 space-y-1"
         >
           <a href="#home" class="mobile-link block py-2.5 nav-text font-medium"
             >Home</a
@@ -398,28 +434,26 @@
     <main>
       <section
         id="home"
-        class="relative min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden grid-bg"
+        class="relative min-h-screen pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
         <div class="hero-orb orb-one"></div>
         <div class="hero-orb orb-two"></div>
         <div class="hero-orb orb-three"></div>
-
         <div
           class="max-w-7xl mx-auto min-h-[calc(100vh-128px)] flex items-center relative z-10"
         >
           <div
-            class="grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center w-full"
+            class="grid lg:grid-cols-[1.05fr_.95fr] gap-14 items-center w-full"
           >
-            <div>
+            <div class="reveal">
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-cyan-400 text-xs font-bold mb-7"
               >
                 <span
                   class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
-                ></span>
-                NTI & ITIDA Professional Training
+                ></span
+                >NTI & ITIDA Professional Training
               </div>
-
               <h1
                 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.08] tracking-tight mb-7 section-title"
               >
@@ -428,124 +462,96 @@
                   >Network Infrastructure</span
                 >
               </h1>
-
               <p
                 class="max-w-2xl text-base sm:text-lg leading-8 body-text mb-8"
-                style="color: var(--muted)"
               >
                 A professional portfolio showcasing our practical journey
                 through enterprise networking, routing, switching, network
                 security, infrastructure design, and real-world simulations.
               </p>
-
               <div class="flex flex-wrap gap-3">
                 <a
                   href="#projects"
                   class="gradient-bg text-white font-bold px-6 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all"
-                >
-                  Explore Projects
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </a>
-
+                  >Explore Projects
+                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i
+                ></a>
                 <a
                   href="#team"
                   class="glass nav-text font-bold px-6 py-3.5 rounded-xl inline-flex items-center gap-2 transition-all"
-                >
-                  Meet The Team
-                  <i data-lucide="users" class="w-4 h-4"></i>
-                </a>
+                  >Meet The Team <i data-lucide="users" class="w-4 h-4"></i
+                ></a>
               </div>
-
               <div
                 class="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-12 max-w-2xl"
               >
                 <div class="stat-line">
                   <div class="text-2xl font-extrabold gradient-text">120+</div>
-                  <div class="text-xs mt-1" style="color: var(--muted)">
-                    Lab Hours
-                  </div>
+                  <div class="text-xs mt-1 body-text">Lab Hours</div>
                 </div>
-
                 <div class="stat-line">
-                  <div class="text-2xl font-extrabold gradient-text">04</div>
-                  <div class="text-xs mt-1" style="color: var(--muted)">
-                    Projects
-                  </div>
+                  <div class="text-2xl font-extrabold gradient-text">05</div>
+                  <div class="text-xs mt-1 body-text">Projects</div>
                 </div>
-
                 <div class="stat-line">
                   <div class="text-2xl font-extrabold gradient-text">06</div>
-                  <div class="text-xs mt-1" style="color: var(--muted)">
-                    Team Members
-                  </div>
+                  <div class="text-xs mt-1 body-text">Team Members</div>
                 </div>
-
                 <div class="stat-line">
                   <div class="text-2xl font-extrabold gradient-text">100%</div>
-                  <div class="text-xs mt-1" style="color: var(--muted)">
-                    Practical
-                  </div>
+                  <div class="text-xs mt-1 body-text">Practical</div>
                 </div>
               </div>
             </div>
-
-            <div class="relative">
+            <div class="relative reveal" style="transition-delay: 0.15s">
               <div
-                class="glass rounded-[2rem] p-5 sm:p-7 relative overflow-hidden"
+                class="glass rounded-[2rem] p-5 sm:p-7 relative overflow-hidden float-card"
               >
                 <div
                   class="absolute inset-0 bg-gradient-to-br from-violet-500/10 via-transparent to-cyan-500/10"
                 ></div>
-
                 <div
                   class="relative aspect-square flex items-center justify-center"
                 >
                   <div
-                    class="absolute w-[75%] h-[75%] rounded-full border border-dashed border-cyan-400/30 animate-spin"
-                    style="animation-duration: 35s"
+                    class="absolute w-[75%] h-[75%] rounded-full border border-dashed border-cyan-400/30 orbit"
                   ></div>
                   <div
-                    class="absolute w-[55%] h-[55%] rounded-full border border-purple-400/30"
+                    class="absolute w-[55%] h-[55%] rounded-full border border-purple-400/30 orbit-reverse"
                   ></div>
                   <div
                     class="absolute w-[36%] h-[36%] rounded-full bg-gradient-to-br from-violet-600/30 to-cyan-500/20 blur-xl"
                   ></div>
-
                   <div
                     class="absolute top-[10%] left-1/2 -translate-x-1/2 w-14 h-14 rounded-2xl glass flex items-center justify-center text-cyan-400"
                   >
                     <i data-lucide="router" class="w-6 h-6"></i>
                   </div>
-
                   <div
                     class="absolute right-[8%] top-1/2 -translate-y-1/2 w-14 h-14 rounded-2xl glass flex items-center justify-center text-blue-400"
                   >
                     <i data-lucide="server" class="w-6 h-6"></i>
                   </div>
-
                   <div
                     class="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-14 h-14 rounded-2xl glass flex items-center justify-center text-purple-400"
                   >
                     <i data-lucide="shield-check" class="w-6 h-6"></i>
                   </div>
-
                   <div
                     class="absolute left-[8%] top-1/2 -translate-y-1/2 w-14 h-14 rounded-2xl glass flex items-center justify-center text-cyan-400"
                   >
                     <i data-lucide="network" class="w-6 h-6"></i>
                   </div>
-
                   <div
                     class="relative z-10 w-32 h-32 sm:w-40 sm:h-40 rounded-full gradient-bg flex flex-col items-center justify-center text-white shadow-2xl"
                   >
-                    <i data-lucide="globe-2" class="w-9 h-9 mb-2"></i>
-                    <span class="font-extrabold text-sm">NETWORK</span>
-                    <span class="text-[9px] opacity-80 tracking-[0.2em]"
+                    <i data-lucide="globe-2" class="w-9 h-9 mb-2"></i
+                    ><span class="font-extrabold text-sm">NETWORK</span
+                    ><span class="text-[9px] opacity-80 tracking-[.2em]"
                       >INFRASTRUCTURE</span
                     >
                   </div>
                 </div>
-
                 <div
                   class="relative glass rounded-2xl p-4 flex items-center gap-4"
                 >
@@ -558,7 +564,7 @@
                     <div class="font-bold text-sm nav-text">
                       Enterprise Network Architecture
                     </div>
-                    <div class="text-xs mt-1" style="color: var(--muted)">
+                    <div class="text-xs mt-1 body-text">
                       Routing • Security • Switching • Infrastructure
                     </div>
                   </div>
@@ -570,7 +576,7 @@
       </section>
 
       <section class="py-6 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto glass rounded-2xl p-5 sm:p-7">
+        <div class="max-w-7xl mx-auto glass rounded-2xl p-5 sm:p-7 reveal">
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="flex items-center gap-4">
               <div
@@ -580,12 +586,9 @@
               </div>
               <div>
                 <div class="font-bold text-sm nav-text">Routing</div>
-                <div class="text-xs mt-1" style="color: var(--muted)">
-                  OSPF • EIGRP • BGP
-                </div>
+                <div class="text-xs mt-1 body-text">OSPF • EIGRP • BGP</div>
               </div>
             </div>
-
             <div class="flex items-center gap-4">
               <div
                 class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center"
@@ -594,12 +597,9 @@
               </div>
               <div>
                 <div class="font-bold text-sm nav-text">Security</div>
-                <div class="text-xs mt-1" style="color: var(--muted)">
-                  ACL • VPN • Firewall
-                </div>
+                <div class="text-xs mt-1 body-text">ACL • VPN • Firewall</div>
               </div>
             </div>
-
             <div class="flex items-center gap-4">
               <div
                 class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center"
@@ -608,12 +608,9 @@
               </div>
               <div>
                 <div class="font-bold text-sm nav-text">Infrastructure</div>
-                <div class="text-xs mt-1" style="color: var(--muted)">
-                  VLAN • STP • WAN
-                </div>
+                <div class="text-xs mt-1 body-text">VLAN • STP • WAN</div>
               </div>
             </div>
-
             <div class="flex items-center gap-4">
               <div
                 class="w-11 h-11 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center"
@@ -622,7 +619,7 @@
               </div>
               <div>
                 <div class="font-bold text-sm nav-text">Analysis</div>
-                <div class="text-xs mt-1" style="color: var(--muted)">
+                <div class="text-xs mt-1 body-text">
                   Wireshark • Diagnostics
                 </div>
               </div>
@@ -633,9 +630,9 @@
 
       <section id="team" class="py-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-          <div class="max-w-3xl mb-14">
+          <div class="max-w-3xl mb-14 reveal">
             <div
-              class="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-3"
+              class="text-cyan-400 text-xs font-bold uppercase tracking-[.2em] mb-3"
             >
               The Team
             </div>
@@ -643,18 +640,14 @@
               People Behind The
               <span class="gradient-text">Infrastructure</span>
             </h2>
-            <p
-              class="text-sm sm:text-base leading-7"
-              style="color: var(--muted)"
-            >
+            <p class="text-sm sm:text-base leading-7 body-text">
               A collaborative team focused on building practical networking
               knowledge and applying enterprise infrastructure concepts through
               hands-on training.
             </p>
           </div>
-
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center"
@@ -663,22 +656,20 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400"
+                  >Supervisor</span
                 >
-                  Supervisor
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Dr. Aya Magdy</h3>
               <div class="text-xs text-cyan-400 font-semibold mt-1 mb-4">
                 Instructor & Academic Supervisor
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Academic supervision and technical guidance across network
                 infrastructure, routing architecture, and practical enterprise
                 networking.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center"
@@ -687,21 +678,19 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-400"
+                  >Engineer</span
                 >
-                  Engineer
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Ziad Hany Mohamed</h3>
               <div class="text-xs text-purple-400 font-semibold mt-1 mb-4">
                 Routing & Switching
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Focused on dynamic routing, OSPF multi-area architecture,
                 switching technologies, and enterprise topology design.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center"
@@ -710,21 +699,19 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-400"
+                  >Engineer</span
                 >
-                  Engineer
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Rana Ibrahim Abu Shosh</h3>
               <div class="text-xs text-purple-400 font-semibold mt-1 mb-4">
                 Network Security
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Focused on firewall policies, ACL implementation, VPN
                 architectures, and secure network access control.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center"
@@ -733,21 +720,19 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-cyan-500/10 text-cyan-400"
+                  >Engineer</span
                 >
-                  Engineer
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Rodina Ahmed Fouad</h3>
               <div class="text-xs text-cyan-400 font-semibold mt-1 mb-4">
                 Packet Analysis
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Focused on Wireshark analysis, network traffic inspection,
                 troubleshooting, and packet-level diagnostics.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center"
@@ -756,21 +741,19 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400"
+                  >Engineer</span
                 >
-                  Engineer
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Rahma Waleed Ezzeldin</h3>
               <div class="text-xs text-blue-400 font-semibold mt-1 mb-4">
                 IP Subnetting
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Focused on VLSM, IPv4 and IPv6 addressing, DHCP, and scalable
                 enterprise IP addressing architecture.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-6">
+            <div class="glass tilt-card rounded-2xl p-6 reveal">
               <div class="flex justify-between items-start mb-7">
                 <div
                   class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center"
@@ -779,15 +762,14 @@
                 </div>
                 <span
                   class="text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400"
+                  >Engineer</span
                 >
-                  Engineer
-                </span>
               </div>
               <h3 class="text-lg font-bold nav-text">Elany Ayman Fayek</h3>
               <div class="text-xs text-indigo-400 font-semibold mt-1 mb-4">
                 Simulation & Testing
               </div>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Focused on GNS3, Cisco Packet Tracer, topology simulation,
                 testing, and network failover scenarios.
               </p>
@@ -798,27 +780,23 @@
 
       <section id="training" class="py-24 px-4 sm:px-6 lg:px-8 soft-bg">
         <div class="max-w-7xl mx-auto">
-          <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="text-center max-w-3xl mx-auto mb-14 reveal">
             <div
-              class="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-3"
+              class="text-cyan-400 text-xs font-bold uppercase tracking-[.2em] mb-3"
             >
               Training Modules
             </div>
             <h2 class="text-3xl sm:text-4xl font-extrabold section-title mb-4">
               What We <span class="gradient-text">Learned</span>
             </h2>
-            <p
-              class="text-sm sm:text-base leading-7"
-              style="color: var(--muted)"
-            >
+            <p class="text-sm sm:text-base leading-7 body-text">
               A practical curriculum covering the essential technologies
               required to design, operate, secure, and troubleshoot modern
               networks.
             </p>
           </div>
-
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="glass transition-card rounded-2xl p-7">
+            <div class="glass tilt-card rounded-2xl p-7 reveal">
               <div
                 class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-6"
               >
@@ -827,46 +805,43 @@
               <h3 class="font-bold text-lg nav-text mb-3">
                 Routing & Switching
               </h3>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 OSPF, EIGRP, BGP, VLANs, STP, inter-VLAN routing, trunking, and
                 redundancy.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-7">
+            <div class="glass tilt-card rounded-2xl p-7 reveal">
               <div
                 class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-6"
               >
                 <i data-lucide="shield-alert" class="w-6 h-6"></i>
               </div>
               <h3 class="font-bold text-lg nav-text mb-3">Network Security</h3>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Firewalls, ACLs, IPsec VPNs, NAT/PAT, port security, and secure
                 network segmentation.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-7">
+            <div class="glass tilt-card rounded-2xl p-7 reveal">
               <div
                 class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-6"
               >
                 <i data-lucide="workflow" class="w-6 h-6"></i>
               </div>
               <h3 class="font-bold text-lg nav-text mb-3">IP Addressing</h3>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 IPv4, IPv6, VLSM, subnetting, DHCP, address planning, and
                 scalable IP allocation.
               </p>
             </div>
-
-            <div class="glass transition-card rounded-2xl p-7">
+            <div class="glass tilt-card rounded-2xl p-7 reveal">
               <div
                 class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6"
               >
                 <i data-lucide="search-check" class="w-6 h-6"></i>
               </div>
               <h3 class="font-bold text-lg nav-text mb-3">Troubleshooting</h3>
-              <p class="text-xs leading-6" style="color: var(--muted)">
+              <p class="text-xs leading-6 body-text">
                 Packet analysis, connectivity diagnostics, topology testing, and
                 structured troubleshooting.
               </p>
@@ -878,11 +853,11 @@
       <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
           <div
-            class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14"
+            class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal"
           >
             <div class="max-w-3xl">
               <div
-                class="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-3"
+                class="text-cyan-400 text-xs font-bold uppercase tracking-[.2em] mb-3"
               >
                 Practical Work
               </div>
@@ -891,44 +866,43 @@
               >
                 Featured <span class="gradient-text">Projects</span>
               </h2>
-              <p
-                class="text-sm sm:text-base leading-7"
-                style="color: var(--muted)"
-              >
+              <p class="text-sm sm:text-base leading-7 body-text">
                 Practical network scenarios designed and simulated during the
                 training journey.
               </p>
             </div>
-
             <div
               class="text-xs font-semibold px-4 py-2 rounded-full glass nav-text"
             >
-              04 Practical Projects
+              05 Practical Projects
             </div>
           </div>
-
           <div class="grid md:grid-cols-2 gap-7">
             <div
-              class="project-card glass transition-card rounded-2xl overflow-hidden"
+              class="project-card glass tilt-card rounded-2xl overflow-hidden reveal"
             >
-              <div class="relative h-60 overflow-hidden bg-slate-900">
+              <div
+                class="project-image-wrap relative h-60 overflow-hidden bg-slate-900"
+                onclick="
+                  openImage('./3.jpeg', 'Cisco Packet Tracer Network Topology')
+                "
+              >
                 <img
                   src="./3.jpeg"
-                  alt="Final Network Project"
+                  alt="Cisco Packet Tracer Network Topology"
                   class="project-image w-full h-full object-cover"
                   onerror="this.style.display = 'none'"
                 />
-                <div
-                  class="project-overlay absolute inset-0 bg-gradient-to-t from-[#101321] via-transparent to-transparent"
-                ></div>
+                <div class="project-overlay absolute inset-0"></div>
                 <span
-                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-cyan-500/80 text-white text-[10px] font-bold uppercase tracking-wider"
-                >
-                  Project 01
-                </span>
+                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-cyan-500/85 text-white text-[10px] font-bold uppercase tracking-wider"
+                  >Project 01</span
+                ><span
+                  class="absolute bottom-4 right-4 w-10 h-10 rounded-xl glass text-white flex items-center justify-center"
+                  ><i data-lucide="zoom-in" class="w-4 h-4"></i
+                ></span>
               </div>
-
-              <div class="p-7">
+              <div class="project-content p-7">
                 <div class="flex items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 class="text-xl font-bold nav-text">
@@ -944,39 +918,30 @@
                     class="w-6 h-6 text-cyan-400 shrink-0"
                   ></i>
                 </div>
-
-                <p class="text-xs leading-6 mb-5" style="color: var(--muted)">
+                <p class="text-xs leading-6 mb-5 body-text">
                   The image shows a computer network simulation created in Cisco
                   Packet Tracer. The topology consists of multiple client PCs
                   and servers segregated into distinct Virtual LANs (VLANs).
                   These devices connect through switches configured with
                   EtherChannel link aggregation for redundancy and higher
                   bandwidth, all routed through a central router implementing
-                  Inter-VLAN routing (Router-on-a-Stick setup). The right side
-                  includes configuration notes (CLI commands) for the switches
-                  and router, including sub-interface settings and IP helper
-                  address configurations.
+                  Inter-VLAN routing (Router-on-a-Stick setup).
                 </p>
-
                 <div class="flex flex-wrap gap-2 mb-6">
                   <span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-cyan-500/10 text-cyan-400"
                     >OSPF</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-cyan-500/10 text-cyan-400"
                     >VLANs</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-cyan-500/10 text-cyan-400"
                     >STP</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-cyan-500/10 text-cyan-400"
                     >Packet Tracer</span
                   >
                 </div>
-
                 <button
                   onclick="
                     openModal(
@@ -993,30 +958,33 @@
             </div>
 
             <div
-              class="project-card glass transition-card rounded-2xl overflow-hidden"
+              class="project-card glass tilt-card rounded-2xl overflow-hidden reveal"
             >
-              <div class="relative h-60 overflow-hidden bg-slate-900">
+              <div
+                class="project-image-wrap relative h-60 overflow-hidden bg-slate-900"
+                onclick="openImage('./1.jpeg', 'Multi-Branch WAN Topology')"
+              >
                 <img
                   src="./1.jpeg"
                   alt="Network Security Project"
                   class="project-image w-full h-full object-cover"
                   onerror="this.style.display = 'none'"
                 />
-                <div
-                  class="project-overlay absolute inset-0 bg-gradient-to-t from-[#101321] via-transparent to-transparent"
-                ></div>
+                <div class="project-overlay absolute inset-0"></div>
                 <span
-                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-purple-500/80 text-white text-[10px] font-bold uppercase tracking-wider"
-                >
-                  Project 02
-                </span>
+                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-purple-500/85 text-white text-[10px] font-bold uppercase tracking-wider"
+                  >Project 02</span
+                ><span
+                  class="absolute bottom-4 right-4 w-10 h-10 rounded-xl glass text-white flex items-center justify-center"
+                  ><i data-lucide="zoom-in" class="w-4 h-4"></i
+                ></span>
               </div>
-
-              <div class="p-7">
+              <div class="project-content p-7">
                 <div class="flex items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 class="text-xl font-bold nav-text">
-                      Multi-Branch WAN Topology with Serial Links (Packet Tracer)
+                      Multi-Branch WAN Topology with Serial Links (Packet
+                      Tracer)
                     </h3>
                     <p class="text-xs text-purple-400 font-semibold mt-1">
                       Infrastructure Security
@@ -1027,30 +995,29 @@
                     class="w-6 h-6 text-purple-400 shrink-0"
                   ></i>
                 </div>
-
-                <p class="text-xs leading-6 mb-5" style="color: var(--muted)">
-The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Tracer. The topology represents a multi-branch network interconnected via point-to-point Serial Links across four ISR4331 routers. It includes four distinct local area networks (LANs/branches)—color-coded in pink, purple, light blue, and dark blue—each equipped with a switch connected to multiple end-user PCs and servers. Each subnet features detailed IP addressing documentation, including network ID, first host, last host, and broadcast address allocations.
+                <p class="text-xs leading-6 mb-5 body-text">
+                  The image shows a Wide Area Network (WAN) simulation built in
+                  Cisco Packet Tracer. The topology represents a multi-branch
+                  network interconnected via point-to-point Serial Links across
+                  four ISR4331 routers. It includes four distinct local area
+                  networks, each equipped with a switch connected to multiple
+                  end-user PCs and servers.
                 </p>
-
                 <div class="flex flex-wrap gap-2 mb-6">
                   <span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-purple-500/10 text-purple-400"
                     >Firewall</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-purple-500/10 text-purple-400"
                     >ACL</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-purple-500/10 text-purple-400"
                     >IPsec</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-purple-500/10 text-purple-400"
                     >DMZ</span
                   >
                 </div>
-
                 <button
                   onclick="
                     openModal(
@@ -1067,33 +1034,37 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
             </div>
 
             <div
-              class="project-card glass transition-card rounded-2xl overflow-hidden"
+              class="project-card glass tilt-card rounded-2xl overflow-hidden reveal"
             >
-              <div class="relative h-60 overflow-hidden bg-slate-900">
+              <div
+                class="project-image-wrap relative h-60 overflow-hidden bg-slate-900"
+                onclick="
+                  openImage('./final.jpeg', 'Final Enterprise Campus Network')
+                "
+              >
                 <img
                   src="./final.jpeg"
-                  alt="VLSM Project"
+                  alt="Final Project"
                   class="project-image w-full h-full object-cover"
                   onerror="this.style.display = 'none'"
                 />
-                <div
-                  class="project-overlay absolute inset-0 bg-gradient-to-t from-[#101321] via-transparent to-transparent"
-                ></div>
+                <div class="project-overlay absolute inset-0"></div>
                 <span
-                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-blue-500/80 text-white text-[10px] font-bold uppercase tracking-wider"
-                >
-                  Final Project
-                </span>
+                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-blue-500/85 text-white text-[10px] font-bold uppercase tracking-wider"
+                  >Project 03</span
+                ><span
+                  class="absolute bottom-4 right-4 w-10 h-10 rounded-xl glass text-white flex items-center justify-center"
+                  ><i data-lucide="zoom-in" class="w-4 h-4"></i
+                ></span>
               </div>
-
-              <div class="p-7">
+              <div class="project-content p-7">
                 <div class="flex items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 class="text-xl font-bold nav-text">
-                      Final Project
+                      Final Enterprise Campus Network
                     </h3>
                     <p class="text-xs text-blue-400 font-semibold mt-1">
-                      highly redundant Enterprise Campus Network design simulated in Cisco Packet Tracer.
+                      Highly Redundant Enterprise Network
                     </p>
                   </div>
                   <i
@@ -1101,30 +1072,27 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                     class="w-6 h-6 text-blue-400 shrink-0"
                   ></i>
                 </div>
-
-                <p class="text-xs leading-6 mb-5" style="color: var(--muted)">
-                    The image shows a comprehensive, highly redundant Enterprise Campus Network design simulated in Cisco Packet Tracer. It strictly follows Cisco's three-tier hierarchical design model consisting of the Core, Distribution
+                <p class="text-xs leading-6 mb-5 body-text">
+                  A comprehensive Enterprise Campus Network design simulated in
+                  Cisco Packet Tracer using a hierarchical approach with core,
+                  distribution, and access layers, combined with structured
+                  addressing, routing, switching, and redundancy concepts.
                 </p>
-
                 <div class="flex flex-wrap gap-2 mb-6">
                   <span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-blue-500/10 text-blue-400"
                     >VLSM</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-blue-500/10 text-blue-400"
                     >IPv4</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-blue-500/10 text-blue-400"
                     >IPv6</span
-                  >
-                  <span
+                  ><span
                     class="px-2.5 py-1 rounded-full text-[10px] bg-blue-500/10 text-blue-400"
                     >DHCP</span
                   >
                 </div>
-
                 <button
                   onclick="
                     openModal(
@@ -1139,141 +1107,190 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                 </button>
               </div>
             </div>
+
+            <div
+              class="project-card glass tilt-card rounded-2xl overflow-hidden reveal"
+            >
+              <div
+                class="project-image-wrap relative h-60 overflow-hidden bg-slate-900"
+                onclick="openImage('./2.jpeg', 'nn')"
+              >
+                <img
+                  src="./2.jpeg"
+                  alt="nn"
+                  class="project-image w-full h-full object-cover"
+                  onerror="this.style.display = 'none'"
+                />
+                <div
+                  class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-violet-500/10 via-cyan-500/5 to-blue-500/10"
+                >
+                  <div class="text-center">
+                    <div
+                      class="w-16 h-16 mx-auto rounded-2xl glass flex items-center justify-center text-cyan-400 mb-3"
+                    >
+                      <i data-lucide="image-plus" class="w-7 h-7"></i>
+                    </div>
+                    <div class="text-xs font-bold nav-text">Project Image</div>
+                    <div class="text-[10px] body-text mt-1">
+                      <img src="./2.jpeg" alt="" srcset="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="project-overlay absolute inset-0"></div>
+                <span
+                  class="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-cyan-500/85 text-white text-[10px] font-bold uppercase tracking-wider"
+                  >Project 04</span
+                ><span
+                  class="absolute bottom-4 right-4 w-10 h-10 rounded-xl glass text-white flex items-center justify-center"
+                  ><i data-lucide="zoom-in" class="w-4 h-4"></i
+                ></span>
+              </div>
+              <div class="project-content p-7">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <h3 class="text-xl font-bold nav-text">
+                      Cisco Packet Tracer Network Topology Diagram
+                    </h3>
+                    <p class="text-xs text-cyan-400 font-semibold mt-1">
+                      Network Topology Diagram
+                    </p>
+                  </div>
+                  <i
+                    data-lucide="folder-kanban"
+                    class="w-6 h-6 text-cyan-400 shrink-0"
+                  ></i>
+                </div>
+                <p class="text-xs leading-6 mb-5 body-text">
+                  A screenshot of a multi-subnet network topology designed in
+                  Cisco Packet Tracer, featuring interconnected routers,
+                  switches, end-user PCs, WAN serial links, and IP subnets
+                  configuration details.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="px-2.5 py-1 rounded-full text-[10px] bg-cyan-500/10 text-cyan-400"
+                    >IPV4</span
+                  ><span
+                    class="px-2.5 py-1 rounded-full text-[10px] bg-purple-500/10 text-purple-400"
+                    >IPV6</span
+                  >
+                </div>
+                <button
+                  onclick="openModal('Project 04', 'nn', 'nn')"
+                  class="w-full py-3 rounded-xl border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all text-xs font-bold"
+                >
+                  View Project Details
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="skills" class="py-24 px-4 sm:px-6 lg:px-8 soft-bg">
         <div class="max-w-7xl mx-auto">
-          <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="text-center max-w-3xl mx-auto mb-14 reveal">
             <div
-              class="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-3"
+              class="text-cyan-400 text-xs font-bold uppercase tracking-[.2em] mb-3"
             >
               Technology Stack
             </div>
             <h2 class="text-3xl sm:text-4xl font-extrabold section-title mb-4">
               Technical <span class="gradient-text">Skills</span>
             </h2>
-            <p
-              class="text-sm sm:text-base leading-7"
-              style="color: var(--muted)"
-            >
+            <p class="text-sm sm:text-base leading-7 body-text">
               Tools, technologies, and networking concepts explored throughout
               the training program.
             </p>
           </div>
-
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="router" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">Cisco Networking</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                Routers & Switches
-              </p>
+              <p class="text-[11px] mt-2 body-text">Routers & Switches</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="git-branch" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">Routing Protocols</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                OSPF • EIGRP • BGP
-              </p>
+              <p class="text-[11px] mt-2 body-text">OSPF • EIGRP • BGP</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="network" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">VLAN & Switching</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                VLAN • STP • Trunking
-              </p>
+              <p class="text-[11px] mt-2 body-text">VLAN • STP • Trunking</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-red-500/10 text-red-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="shield" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">Network Security</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                Firewall • ACL • VPN
-              </p>
+              <p class="text-[11px] mt-2 body-text">Firewall • ACL • VPN</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="terminal-square" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">Packet Tracer</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                Network Simulation
-              </p>
+              <p class="text-[11px] mt-2 body-text">Network Simulation</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="boxes" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">GNS3</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                Advanced Simulation
-              </p>
+              <p class="text-[11px] mt-2 body-text">Advanced Simulation</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="scan-search" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">Wireshark</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                Packet Inspection
-              </p>
+              <p class="text-[11px] mt-2 body-text">Packet Inspection</p>
             </div>
-
             <div
-              class="skill-card glass transition-card rounded-2xl p-6 text-center"
+              class="skill-card glass tilt-card rounded-2xl p-6 text-center reveal"
             >
               <div
-                class="skill-icon w-14 h-14 mx-auto rounded-2xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-5"
+                class="w-14 h-14 mx-auto rounded-2xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-5"
               >
                 <i data-lucide="binary" class="w-7 h-7"></i>
               </div>
               <h3 class="font-bold text-sm nav-text">IP Subnetting</h3>
-              <p class="text-[11px] mt-2" style="color: var(--muted)">
-                VLSM • IPv4 • IPv6
-              </p>
+              <p class="text-[11px] mt-2 body-text">VLSM • IPv4 • IPv6</p>
             </div>
           </div>
         </div>
@@ -1282,9 +1299,9 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
       <section id="journey" class="py-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
           <div class="grid lg:grid-cols-2 gap-14 items-start">
-            <div>
+            <div class="reveal">
               <div
-                class="text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-3"
+                class="text-cyan-400 text-xs font-bold uppercase tracking-[.2em] mb-3"
               >
                 Our Journey
               </div>
@@ -1294,12 +1311,11 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                 From Concepts to
                 <span class="gradient-text">Real Topologies</span>
               </h2>
-              <p class="text-sm leading-7 mb-8" style="color: var(--muted)">
+              <p class="text-sm leading-7 mb-8 body-text">
                 The training combined theoretical networking concepts with
                 practical simulations, allowing the team to progressively build
                 and troubleshoot increasingly complex network environments.
               </p>
-
               <div class="glass rounded-2xl p-6">
                 <div class="flex items-center gap-4">
                   <div
@@ -1311,15 +1327,14 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                     <div class="font-bold nav-text">
                       NTI & ITIDA Training Track
                     </div>
-                    <div class="text-xs mt-1" style="color: var(--muted)">
+                    <div class="text-xs mt-1 body-text">
                       Network Infrastructure
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="space-y-7">
+            <div class="space-y-7 reveal">
               <div class="relative pl-12">
                 <div class="timeline-line"></div>
                 <div
@@ -1328,12 +1343,11 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                   <i data-lucide="book-open" class="w-4 h-4"></i>
                 </div>
                 <h3 class="font-bold nav-text mb-2">01. Foundations</h3>
-                <p class="text-xs leading-6" style="color: var(--muted)">
+                <p class="text-xs leading-6 body-text">
                   Built a strong foundation in networking fundamentals,
                   protocols, addressing, and infrastructure components.
                 </p>
               </div>
-
               <div class="relative pl-12">
                 <div class="timeline-line"></div>
                 <div
@@ -1344,12 +1358,11 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                 <h3 class="font-bold nav-text mb-2">
                   02. Infrastructure Design
                 </h3>
-                <p class="text-xs leading-6" style="color: var(--muted)">
+                <p class="text-xs leading-6 body-text">
                   Applied routing, switching, VLAN segmentation, subnetting, and
                   redundancy to practical network topologies.
                 </p>
               </div>
-
               <div class="relative pl-12">
                 <div class="timeline-line"></div>
                 <div
@@ -1360,12 +1373,11 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                 <h3 class="font-bold nav-text mb-2">
                   03. Security & Troubleshooting
                 </h3>
-                <p class="text-xs leading-6" style="color: var(--muted)">
+                <p class="text-xs leading-6 body-text">
                   Implemented security controls and practiced systematic
                   approaches to identifying and resolving network issues.
                 </p>
               </div>
-
               <div class="relative pl-12">
                 <div
                   class="absolute left-0 top-0 w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center"
@@ -1373,7 +1385,7 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
                   <i data-lucide="rocket" class="w-4 h-4"></i>
                 </div>
                 <h3 class="font-bold nav-text mb-2">04. Capstone Projects</h3>
-                <p class="text-xs leading-6" style="color: var(--muted)">
+                <p class="text-xs leading-6 body-text">
                   Combined the acquired skills into practical enterprise
                   scenarios and complete simulated network environments.
                 </p>
@@ -1385,27 +1397,23 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
 
       <section class="py-20 px-4 sm:px-6 lg:px-8">
         <div
-          class="max-w-5xl mx-auto glass rounded-[2rem] p-8 sm:p-12 text-center relative overflow-hidden"
+          class="max-w-5xl mx-auto glass rounded-[2rem] p-8 sm:p-12 text-center relative overflow-hidden reveal"
         >
           <div
             class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10"
           ></div>
-
           <div class="relative">
             <div
               class="w-14 h-14 mx-auto rounded-2xl gradient-bg flex items-center justify-center text-white mb-6"
             >
               <i data-lucide="network" class="w-7 h-7"></i>
             </div>
-
             <h2 class="text-3xl sm:text-4xl font-extrabold section-title mb-4">
               Engineering Networks That
               <span class="gradient-text">Connect</span>
             </h2>
-
             <p
-              class="max-w-2xl mx-auto text-sm sm:text-base leading-7"
-              style="color: var(--muted)"
+              class="max-w-2xl mx-auto text-sm sm:text-base leading-7 body-text"
             >
               A practical showcase of the knowledge, teamwork, and technical
               experience developed throughout the NTI ITIDA Network
@@ -1416,74 +1424,79 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
       </section>
     </main>
 
-    <footer class="border-t border-light py-8 px-4 sm:px-6 lg:px-8">
+    <footer class="border-t border-white/10 py-8 px-4 sm:px-6 lg:px-8">
       <div
         class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs"
       >
-        <div style="color: var(--muted)">
+        <div class="body-text">
           NTI ITIDA Network Infrastructure Portfolio © 2026
         </div>
-
-        <div class="flex items-center gap-2" style="color: var(--muted)">
-          <span>Supervised by</span>
-          <span class="font-semibold nav-text">Dr. Aya Magdy</span>
+        <div class="flex items-center gap-2 body-text">
+          <span>Supervised by</span
+          ><span class="font-semibold nav-text">Dr. Aya Magdy</span>
         </div>
-
         <a
           href="https://github.com"
           target="_blank"
           rel="noopener"
           class="flex items-center gap-2 nav-text hover:text-cyan-400 transition-colors font-semibold"
+          ><i data-lucide="github" class="w-4 h-4"></i>GitHub</a
         >
-          <i data-lucide="github" class="w-4 h-4"></i>
-          GitHub
-        </a>
       </div>
     </footer>
 
     <div
       id="modalBackdrop"
-      class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md"
+      class="modal-backdrop fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/75 backdrop-blur-md"
     >
       <div
-        class="modal-box glass max-w-lg w-full rounded-3xl p-7 sm:p-8 relative"
+        class="modal-panel glass max-w-lg w-full rounded-3xl p-7 sm:p-8 relative"
       >
         <button
           onclick="closeModal()"
-          class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center nav-text hover:text-cyan-400 transition-colors"
+          class="absolute top-5 right-5 w-9 h-9 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center nav-text hover:text-cyan-400"
         >
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-
         <div
           class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-6"
         >
           <i data-lucide="folder-git-2" class="w-6 h-6"></i>
         </div>
-
         <div
           id="modalSub"
           class="text-xs text-cyan-400 font-bold uppercase tracking-widest mb-2"
         ></div>
         <h3 id="modalTitle" class="text-2xl font-extrabold nav-text mb-4"></h3>
-        <p
-          id="modalDesc"
-          class="text-sm leading-7 mb-7"
-          style="color: var(--muted)"
-        ></p>
-
+        <p id="modalDesc" class="text-sm leading-7 mb-7 body-text"></p>
         <button
           onclick="closeModal()"
-          class="w-full py-3 rounded-xl gradient-bg text-white text-xs font-bold transition-all"
+          class="w-full py-3 rounded-xl gradient-bg text-white text-xs font-bold"
         >
           Close
         </button>
       </div>
     </div>
 
+    <div
+      id="imageViewer"
+      class="image-viewer fixed inset-0 z-[110] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-xl"
+    >
+      <button
+        onclick="closeImage()"
+        class="absolute top-5 right-5 w-11 h-11 rounded-xl bg-white/10 text-white flex items-center justify-center hover:bg-white/20"
+      >
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div
+        class="absolute top-5 left-5 text-white/80 text-xs font-semibold glass rounded-xl px-4 py-2"
+        id="imageViewerTitle"
+      ></div>
+      <img id="viewerImage" src="" alt="" class="rounded-2xl shadow-2xl" />
+    </div>
+
     <script>
       lucide.createIcons();
-
       const body = document.body;
       const themeBtn = document.getElementById("themeBtn");
       const themeIcon = document.getElementById("themeIcon");
@@ -1491,79 +1504,97 @@ The image shows a Wide Area Network (WAN) simulation built in Cisco Packet Trace
       const mobileMenu = document.getElementById("mobileMenu");
       const navbar = document.getElementById("navbar");
       const modalBackdrop = document.getElementById("modalBackdrop");
-
+      const imageViewer = document.getElementById("imageViewer");
+      const viewerImage = document.getElementById("viewerImage");
+      const viewerTitle = document.getElementById("imageViewerTitle");
       const savedTheme = localStorage.getItem("portfolio-theme");
-
       if (savedTheme === "light") {
         body.classList.add("light");
         themeIcon.setAttribute("data-lucide", "moon");
       } else {
-        body.classList.remove("light");
         themeIcon.setAttribute("data-lucide", "sun");
       }
-
       lucide.createIcons();
-
       themeBtn.addEventListener("click", () => {
         body.classList.toggle("light");
-
         const isLight = body.classList.contains("light");
-
         localStorage.setItem("portfolio-theme", isLight ? "light" : "dark");
-
         themeIcon.setAttribute("data-lucide", isLight ? "moon" : "sun");
-
         lucide.createIcons();
       });
-
       mobileBtn.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
         mobileMenu.classList.toggle("mobile-open");
       });
-
-      document.querySelectorAll(".mobile-link").forEach((link) => {
+      document.querySelectorAll(".mobile-link").forEach((link) =>
         link.addEventListener("click", () => {
           mobileMenu.classList.add("hidden");
           mobileMenu.classList.remove("mobile-open");
-        });
-      });
-
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 20) {
-          navbar.classList.add("nav-scrolled");
-        } else {
-          navbar.classList.remove("nav-scrolled");
-        }
-      });
-
+        }),
+      );
+      window.addEventListener("scroll", () =>
+        navbar.classList.toggle("nav-scrolled", window.scrollY > 20),
+      );
       function openModal(sub, title, desc) {
         document.getElementById("modalSub").textContent = sub;
         document.getElementById("modalTitle").textContent = title;
         document.getElementById("modalDesc").textContent = desc;
-
         modalBackdrop.classList.remove("hidden");
         modalBackdrop.classList.add("flex");
         document.body.style.overflow = "hidden";
-
         lucide.createIcons();
       }
-
       function closeModal() {
         modalBackdrop.classList.add("hidden");
         modalBackdrop.classList.remove("flex");
+        if (imageViewer.classList.contains("hidden"))
+          document.body.style.overflow = "";
+      }
+      function openImage(src, title) {
+        if (src === "#") return;
+        viewerImage.src = src;
+        viewerImage.alt = title;
+        viewerTitle.textContent = title;
+        imageViewer.classList.remove("hidden");
+        imageViewer.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      }
+      function closeImage() {
+        imageViewer.classList.add("hidden");
+        imageViewer.classList.remove("flex");
+        viewerImage.src = "";
         document.body.style.overflow = "";
       }
-
-      modalBackdrop.addEventListener("click", (event) => {
-        if (event.target === modalBackdrop) {
+      modalBackdrop.addEventListener("click", (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+      imageViewer.addEventListener("click", (e) => {
+        if (e.target === imageViewer) closeImage();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
           closeModal();
+          closeImage();
         }
       });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          closeModal();
-        }
+      const observer = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          }),
+        { threshold: 0.12 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+      document.querySelectorAll(".tilt-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(900px) rotateX(${y * -5}deg) rotateY(${x * 5}deg) translateY(-5px)`;
+        });
+        card.addEventListener("mouseleave", () => (card.style.transform = ""));
       });
     </script>
   </body>
